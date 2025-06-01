@@ -460,10 +460,8 @@
                         <span class="stat-title">Tổng số hộ</span>
                         <div class="stat-icon households">🏘️</div>
                     </div>
-                    <div class="stat-value loading" id="totalHouseholds">120</div>
-                    <div class="stat-trend">
-                        ↗️ +5% so với tháng trước
-                    </div>
+                    <div class="stat-value loading" id="totalHouseholds">{{total_household}}</div>
+                    
                 </div>
 
                 <div class="stat-card">
@@ -471,21 +469,17 @@
                         <span class="stat-title">Tỷ lệ thanh toán</span>
                         <div class="stat-icon payment">👥</div>
                     </div>
-                    <div class="stat-value loading" id="paymentRate">85%</div>
-                    <div class="stat-trend">
-                        ↗️ +3% so với tháng trước
-                    </div>
+                    <div class="stat-value loading" id="paymentRate">{{revenue_ratio}}</div>
+                    
                 </div>
 
                 <div class="stat-card">
                     <div class="stat-header">
-                        <span class="stat-title">Báo cáo chờ duyệt</span>
+                        <span class="stat-title">Yêu cầu chờ duyệt</span>
                         <div class="stat-icon reports">📈</div>
                     </div>
-                    <div class="stat-value loading" id="pendingReports">5</div>
-                    <div class="stat-trend">
-                        ↘️ -2 so với hôm qua
-                    </div>
+                    <div class="stat-value loading" id="pendingReports">{{yeucau_choduyet}}</div>
+                    
                 </div>
             </div>
 
@@ -607,9 +601,9 @@
         // Initialize animations on page load
         window.addEventListener('load', function() {
             setTimeout(() => {
-                animateNumber(document.getElementById('totalHouseholds'), '120');
-                animateNumber(document.getElementById('paymentRate'), '85%');
-                animateNumber(document.getElementById('pendingReports'), '5');
+                animateNumber(document.getElementById('totalHouseholds'), '{{total_household}}');
+                animateNumber(document.getElementById('paymentRate'), '{{revenue_ratio}}%');
+                animateNumber(document.getElementById('pendingReports'), '{{yeucau_choduyet}}');
             }, 500);
         });
 

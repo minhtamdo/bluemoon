@@ -23,6 +23,8 @@ from django.db.models import Sum, Count, Q, OuterRef, Subquery, Exists
 from datetime import datetime
 from django.template.loader import render_to_string
 from django.http import JsonResponse, HttpResponse
+from core import views  # Thêm dòng này để import views từ app core
+from django.views.decorators.csrf import csrf_exempt
 
 def ketoan_view(request):
     # Tổng số chủ hộ
@@ -148,10 +150,35 @@ def search_residents(request):
     return JsonResponse({'html': html})
 
 
+def totruong_quanlyhokhau_view(request): 
+    total_households = Household.objects.count()
+    total_members = HouseholdMember.objects.count()
+    total_change_yeucau = HouseholdChange.objects.count()
+    total_tamtru_yeucau = ResidencyRequest.objects.filter(request_type='temporary_residence').count()
+    total_tamvang_yeucau = ResidencyRequest.objects.filter(request_type='temporary_absence').count()
+    head_name = Household.objects.filter(head__role='chu_ho').select_related('head')
+
+
+    return render(request, 'quanlyhokhau.html', {
+        'households': Household.objects.all(),
+        'head_name': head_name,
+        'total_households': total_households,
+        'total_members': total_members,
+        'total_change_yeucau': total_change_yeucau,
+        'total_tamtru_yeucau': total_tamtru_yeucau,
+        'total_tamvang_yeucau': total_tamvang_yeucau,
+    })
+
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ketoan_view, name='home'),  # xử lý root URL
     path('ketoan/', ketoan_view, name='ketoan'),
     path('search-residents/', search_residents, name='search_residents'),
+    path('totruong/quanlyhokhau/', totruong_quanlyhokhau_view, name='totruong'),
+    path('add-household/', views.add_household, name='add_household'),
+
 ]
 

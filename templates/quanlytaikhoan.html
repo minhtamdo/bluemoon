@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMoon - Quản lý Chung cư</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="icon">🏢</div>
+                <h2>BlueMoon</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="quanlyhokhau.html" class="nav-link active" onclick="showSection('household')">
+                        <div class="icon">🏠</div>
+                        <span>Quản lý hộ khẩu</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="quanlynhankhau.html" class="nav-link" onclick="showSection('resident')">
+                        <div class="icon">👥</div>
+                        <span>Quản lý nhân khẩu</span>
+                    </a>
+                </li>
+                 <!-- Mục Xử lý yêu cầu có submenu -->
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link submenu-toggle">
+                        <div class="icon">⚙️</div>
+                        <span>Xử lý yêu cầu</span>
+                        <div class="submenu-arrow">▸</div>
+                    </a>
+                    <ul class="submenu">
+                        <li class="nav-item">
+                            <a href="yeucauthaydoi.html" class="nav-link" onclick="showSection('change-requests')">
+                                <div class="icon">📝</div>
+                                <span>Yêu cầu thay đổi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="yeucautamvang.html" class="nav-link" onclick="showSection('temporary-absence')">
+                                <div class="icon">🚪</div>
+                                <span>Yêu cầu tạm vắng</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="yeucautamtru.html" class="nav-link" onclick="showSection('temporary-residence')">
+                                <div class="icon">🏠</div>
+                                <span>Yêu cầu tạm trú</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="quanlytaikhoan.html" class="nav-link" onclick="showSection('accounts')">
+                        <div class="icon">👤</div>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1 id="page-title">Quản lý tài khoản</h1>
+                <div class="user-info">
+                    <span>Tổ trưởng Tòa A</span>
+                    <div class="user-avatar">TT</div>
+                </div>
+            </div>
+
+
+            <!-- Account Management -->
+                <div id="accounts" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">67</div>
+                            <div class="stat-label">Tổng tài khoản</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">45</div>
+                            <div class="stat-label">Tài khoản hoạt động</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">22</div>
+                            <div class="stat-label">Tài khoản khóa</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h3 class="card-title">Danh sách tài khoản</h3>
+                            <button class="btn btn-primary" onclick="openModal('add-account')">
+                                <span>➕</span> Thêm tài khoản
+                            </button>
+                        </div>
+
+                        <div class="search-filter">
+                            <div class="search-box">
+                                <input type="text" class="search-input" placeholder="Tìm kiếm theo tên đăng nhập, email...">
+                                <button class="search-btn">🔍</button>
+                            </div>
+                            <select class="filter-select">
+                                <option>Tất cả vai trò</option>
+                                <option>Chủ hộ</option>
+                                <option>Thành viên</option>
+                                <option>Tổ trưởng</option>
+                            </select>
+                            <select class="filter-select">
+                                <option>Tất cả trạng thái</option>
+                                <option>Hoạt động</option>
+                                <option>Khóa</option>
+                            </select>
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Mã TK</th>
+                                        <th>Tên đăng nhập</th>
+                                        <th>Tên người dùng</th>
+                                        <th>Email</th>
+                                        <th>Vai trò</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>TK001</td>
+                                        <td>nguyenvanan</td>
+                                        <td>Nguyễn Văn An</td>
+                                        <td>an@email.com</td>
+                                        <td>Chủ hộ</td>
+                                        <td><span class="status-badge status-approved">Hoạt động</span></td>
+                                        <td>
+                                            <button class="btn btn-primary" onclick="editAccount('TK001')">✏️</button>
+                                            <button class="btn btn-warning" onclick="lockAccount('TK001')">🔒</button>
+                                            <button class="btn btn-danger" onclick="deleteAccount('TK001')">🗑️</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-title">Thông tin</h3>
+                            <button class="close-btn" onclick="closeModal()">×</button>
+                        </div>
+                        <div id="modal-body">
+                            <!-- Modal content will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+</body>
+</html>
