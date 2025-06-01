@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMoon - Quản lý Chung cư</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="icon">🏢</div>
+                <h2>BlueMoon</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="quanlyhokhau.html" class="nav-link active" onclick="showSection('household')">
+                        <div class="icon">🏠</div>
+                        <span>Quản lý hộ khẩu</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="quanlynhankhau.html" class="nav-link" onclick="showSection('resident')">
+                        <div class="icon">👥</div>
+                        <span>Quản lý nhân khẩu</span>
+                    </a>
+                </li>
+                 <!-- Mục Xử lý yêu cầu có submenu -->
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link submenu-toggle">
+                        <div class="icon">⚙️</div>
+                        <span>Xử lý yêu cầu</span>
+                        <div class="submenu-arrow">▸</div>
+                    </a>
+                    <ul class="submenu">
+                        <li class="nav-item">
+                            <a href="yeucauthaydoi.html" class="nav-link" onclick="showSection('change-requests')">
+                                <div class="icon">📝</div>
+                                <span>Yêu cầu thay đổi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="yeucautamvang.html" class="nav-link" onclick="showSection('temporary-absence')">
+                                <div class="icon">🚪</div>
+                                <span>Yêu cầu tạm vắng</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="yeucautamtru.html" class="nav-link" onclick="showSection('temporary-residence')">
+                                <div class="icon">🏠</div>
+                                <span>Yêu cầu tạm trú</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="quanlytaikhoan.html" class="nav-link" onclick="showSection('accounts')">
+                        <div class="icon">👤</div>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1 id="page-title">Quản lý nhân khẩu</h1>
+                <div class="user-info">
+                    <span>Tổ trưởng Tòa A</span>
+                    <div class="user-avatar">TT</div>
+                </div>
+            </div>
+
+
+            <!-- Resident Management -->
+            <div class="content-area">
+                <div id="resident" class="content-section active">
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-number">342</div>
+                                <div class="stat-label">Tổng nhân khẩu</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">178</div>
+                                <div class="stat-label">Nam</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">164</div>
+                                <div class="stat-label">Nữ</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number">45</div>
+                                <div class="stat-label">Dưới 18 tuổi</div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                                <h3 class="card-title">Danh sách nhân khẩu</h3>
+                                <button class="btn btn-primary" onclick="openModal('add-resident')">
+                                    <span>➕</span> Thêm nhân khẩu
+                                </button>
+                            </div>
+
+                            <div class="search-filter">
+                                <div class="search-box">
+                                    <input type="text" class="search-input" placeholder="Tìm kiếm theo tên, CCCD, số phòng...">
+                                    <button class="search-btn">🔍</button>
+                                </div>
+                                <select class="filter-select">
+                                    <option>Tất cả giới tính</option>
+                                    <option>Nam</option>
+                                    <option>Nữ</option>
+                                </select>
+                                <select class="filter-select">
+                                    <option>Tất cả độ tuổi</option>
+                                    <option>Dưới 18</option>
+                                    <option>18-30</option>
+                                    <option>30-60</option>
+                                    <option>Trên 60</option>
+                                </select>
+                            </div>
+
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Mã NK</th>
+                                            <th>Họ tên</th>
+                                            <th>CCCD</th>
+                                            <th>Giới tính</th>
+                                            <th>Tuổi</th>
+                                            <th>Số phòng</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>NK001</td>
+                                            <td>Nguyễn Văn An</td>
+                                            <td>001234567890</td>
+                                            <td>Nam</td>
+                                            <td>35</td>
+                                            <td>A-101</td>
+                                            <td>
+                                                <button class="btn btn-primary" onclick="editResident('NK001')">✏️</button>
+                                                <button class="btn btn-danger" onclick="deleteResident('NK001')">🗑️</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>NK002</td>
+                                            <td>Nguyễn Thị Cẩm</td>
+                                            <td>001234567891</td>
+                                            <td>Nữ</td>
+                                            <td>32</td>
+                                            <td>A-101</td>
+                                            <td>
+                                                <button class="btn btn-primary" onclick="editResident('NK002')">✏️</button>
+                                                <button class="btn btn-danger" onclick="deleteResident('NK002')">🗑️</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Modal -->
+                        <div id="modal" class="modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 id="modal-title">Thông tin</h3>
+                                    <button class="close-btn" onclick="closeModal()">×</button>
+                                </div>
+                                <div id="modal-body">
+                                    <!-- Modal content will be inserted here -->
+                                </div>
+                            </div>
+                        </div> 
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueMoon - Quản lý Chung cư</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="icon">🏢</div>
+                <h2>BlueMoon</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="quanlyhokhau.html" class="nav-link active" onclick="showSection('household')">
+                        <div class="icon">🏠</div>
+                        <span>Quản lý hộ khẩu</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="quanlynhankhau.html" class="nav-link" onclick="showSection('resident')">
+                        <div class="icon">👥</div>
+                        <span>Quản lý nhân khẩu</span>
+                    </a>
+                </li>
+                <li class="nav-item has-submenu">
+                    <a href="#" class="nav-link submenu-toggle">
+                        <div class="icon">⚙️</div>
+                        <span>Xử lý yêu cầu</span>
+                        <div class="submenu-arrow">▸</div>
+                    </a>
+                    <ul class="submenu">
+                        <li class="nav-item">
+                            <a href="yeucauthaydoi.html" class="nav-link" onclick="showSection('change-requests')">
+                                <div class="icon">📝</div>
+                                <span>Yêu cầu thay đổi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="yeucautamvang.html" class="nav-link" onclick="showSection('temporary-absence')">
+                                <div class="icon">🚪</div>
+                                <span>Yêu cầu tạm vắng</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="yeucautamtru.html" class="nav-link" onclick="showSection('temporary-residence')">
+                                <div class="icon">🏠</div>
+                                <span>Yêu cầu tạm trú</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="quanlytaikhoan.html" class="nav-link" onclick="showSection('accounts')">
+                        <div class="icon">👤</div>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1 id="page-title">Danh sách yêu cầu chờ xử lý</h1>
+                <div class="user-info">
+                    <span>Tổ trưởng Tòa A</span>
+                    <div class="user-avatar">TT</div>
+                </div>
+            </div>
+
+            <!-- Change Requests Management -->
+                <div id="change-requests" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">Yêu cầu chờ xử lý</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">89</div>
+                            <div class="stat-label">Đã phê duyệt</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Đã từ chối</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">112</div>
+                            <div class="stat-label">Tổng yêu cầu</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách yêu cầu thay đổi thông tin</h3>
+                        </div>
+
+                        <div class="search-filter">
+                            <div class="search-box">
+                                <input type="text" class="search-input" placeholder="Tìm kiếm theo tên người yêu cầu...">
+                                <button class="search-btn">🔍</button>
+                            </div>
+                            <select class="filter-select">
+                                <option>Tất cả loại thay đổi</option>
+                                <option>Thông tin cá nhân</option>
+                                <option>Thông tin hộ khẩu</option>
+                                <option>Địa chỉ</option>
+                                <option>Số điện thoại</option>
+                            </select>
+                            <select class="filter-select">
+                                <option>Tất cả trạng thái</option>
+                                <option>Chờ xử lý</option>
+                                <option>Đã phê duyệt</option>
+                                <option>Đã từ chối</option>
+                            </select>
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Mã YC</th>
+                                        <th>Người yêu cầu</th>
+                                        <th>Loại thay đổi</th>
+                                        <th>Nội dung</th>
+                                        <th>Ngày gửi</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>TD001</td>
+                                        <td>Nguyễn Văn An</td>
+                                        <td>Thông tin cá nhân</td>
+                                        <td>Thay đổi số điện thoại</td>
+                                        <td>26/05/2025</td>
+                                        <td><span class="status-badge status-pending">Chờ xử lý</span></td>
+                                        <td>
+                                            <button class="btn btn-success" onclick="approveChangeRequest('TD001')">✅ Duyệt</button>
+                                            <button class="btn btn-danger" onclick="rejectChangeRequest('TD001')">❌ Từ chối</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>TD002</td>
+                                        <td>Trần Thị Bình</td>
+                                        <td>Địa chỉ</td>
+                                        <td>Cập nhật địa chỉ thường trú</td>
+                                        <td>25/05/2025</td>
+                                        <td><span class="status-badge status-approved">Đã phê duyệt</span></td>
+                                        <td>
+                                            <button class="btn btn-primary" onclick="viewChangeRequest('TD002')">👁️ Xem</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>TD003</td>
+                                        <td>Lê Văn Cường</td>
+                                        <td>Thông tin hộ khẩu</td>
+                                        <td>Thêm thành viên mới</td>
+                                        <td>24/05/2025</td>
+                                        <td><span class="status-badge status-pending">Chờ xử lý</span></td>
+                                        <td>
+                                            <button class="btn btn-success" onclick="approveChangeRequest('TD003')">✅ Duyệt</button>
+                                            <button class="btn btn-danger" onclick="rejectChangeRequest('TD003')">❌ Từ chối</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <!-- Modal -->
+                <div id="modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-title">Thông tin</h3>
+                            <button class="close-btn" onclick="closeModal()">×</button>
+                        </div>
+                        <div id="modal-body">
+                            <!-- Modal content will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+</body>
+</html>
